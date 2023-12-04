@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { iMovie } from '../data/iMovie';
 import { MovieService } from '../data/movie.service';
-
+import {MatTableModule} from '@angular/material/table';
+ 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrl: './table.component.css'
+  styleUrl: './table.component.css',  
+  standalone: true,
+  imports: [MatTableModule],
 })
 export class TableComponent {
+  displayedColumns: string[] = ['imageRoute', 'title', 'genre', 'releaseDate'];
+  dataSource: iMovie[] = [];
+    
   movie: iMovie = {
     movieId: 0,
     releaseDate: new Date(),
@@ -29,6 +35,7 @@ export class TableComponent {
     this.movieService.GetAllMovies().then((response) => {
       console.log('response of GetAllMovies', response);
       this.items = response;
+      this.dataSource = response;
     })
     .catch((error) => {
       console.error(': ', error);

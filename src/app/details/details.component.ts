@@ -21,7 +21,8 @@ export class DetailsComponent {
   id: number = 0;
   imageRoute: string = '';
   comments!: [];
-  active = true;
+  active = true;  
+  movies: iMovie[] = [];
   
   constructor(private route: ActivatedRoute, 
     private movieService: MovieService,
@@ -40,13 +41,14 @@ export class DetailsComponent {
     }) 
   }
   saveWatchlist(): void {
-    const list = { movie: this.items };
-    this.localStorageService.setData('list', list);
+    this.movies.push(...this.items); 
+    //const list = { movie: this.items };
+    this.localStorageService.setData('list', this.movies);
     this.active = !this.active;
   }
 
   getWatchlist(): void {
     const list = this.localStorageService.getData('list');
-    console.log('list:', list);
+    console.log('list:', this.movies);
   }  
 }
