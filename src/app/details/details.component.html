@@ -1,0 +1,40 @@
+<br><br>
+<h2>Movie Detail's</h2>
+<br> 
+<br><br>   
+
+<div *ngFor="let i of items">   
+
+    <ul>
+        <li><img src={{imageRoute}} width="35px" height="35px"/> </li>
+        <li>{{i['title']}}</li>
+        <li>{{i['description']}}</li>
+        <li>{{i['rating']}}</li>
+        <li>{{i['duration']}}</li>
+        <li>{{i['genre']}}</li>  
+        <!-- <li>{{i['releaseDate'] | date:'shortDate'}}</li>   -->
+
+        <li>            
+            <div>                
+                <button [disabled]="!active" (click)="saveWatchlist()">Add to Watchlist</button>                
+                <button (click)="getWatchlist()">Get Watchlist</button>
+            </div>
+        </li>        
+        
+        <li>{{i['trailerLink']}}</li>
+
+        <li>
+            <ul *ngFor="let comment of comments">
+                <li>{{comment['content']}}</li>
+            </ul>            
+        </li>
+    </ul>
+</div>
+
+    <br><br>
+
+  
+
+
+
+

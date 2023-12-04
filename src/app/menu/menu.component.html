@@ -1,0 +1,45 @@
+<div class="d-flex">
+
+    <div class="p-3 flex-fill d-flex flex-row-reverse">
+        <div><b>Vídeos</b></div>
+
+        <div>
+          <img src="./assets/youtube.png" class="rounded" height="25px" width="25px">
+        </div>
+    </div>
+
+    <div class="p-2  flex-fill d-flex flex-row-revers">
+        <div class="container">
+
+            <div class="row height d-flex justify-content-center align-items-center">
+
+              <div class="col-md-8">
+
+                <div class="search">
+                  <i class="fa fa-search"></i>
+                  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+                    <input type="text" formControlName="inputVideo" class="form-control" placeholder="Search"
+                      (keypress)="onKeypressEvent($event)" >                    
+                   
+                    <button id="boton" [routerLink]="['/the-search', message]">
+                      <img src="../../assets/search.png" width="15px">
+                    </button>
+
+                  </form>                                  
+                </div>
+                
+              </div>
+              
+            </div>
+        </div>
+    </div>
+
+    <div class="p-4 flex-fill d-flex flex-row-reverse">
+        <!-- <button class="btn ">Theme</button> -->
+    </div>
+</div>
+<br>
+
+
+<!-- (keyup.enter)="sendit($event)" -->
