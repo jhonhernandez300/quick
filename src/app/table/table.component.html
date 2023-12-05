@@ -41,20 +41,25 @@
     Your browser does not support HTML5 video.
 </video>
 <br><br> 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<!-- <table mat-table [dataSource]="dataSource"  matSort (matSortChange)="announceSortChange($event)"  -->
+<table mat-table [dataSource]="dataSource"  matSort class="mat-elevation-z8">
     
     <ng-container matColumnDef="imageRoute">
-      <th mat-header-cell *matHeaderCellDef> Image </th>
-      <td mat-cell *matCellDef="let element">        
+        <th mat-header-cell *matHeaderCellDef>
+            Image
+        </th>
+        <td mat-cell *matCellDef="let element">        
             <a [routerLink]="['/details', element.movieId]">                        
                 <img src={{element.imageRoute}} width="35px" height="35px"/> 
             </a>                 
-      </td>
+        </td>
     </ng-container>  
     
     <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef> Title </th>
-      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by title"> 
+            Title 
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
     </ng-container>  
     
     <ng-container matColumnDef="genre">
@@ -63,7 +68,9 @@
     </ng-container>  
     
     <ng-container matColumnDef="releaseDate">
-      <th mat-header-cell *matHeaderCellDef> Release Date </th>      
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by releaseDate">
+             Release Date 
+        </th>      
       <td mat-cell *matCellDef="let element"> {{element.releaseDate | date:'shortDate'}} </td>
     </ng-container>
   

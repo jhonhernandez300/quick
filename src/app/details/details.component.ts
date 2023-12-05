@@ -25,14 +25,14 @@ export class DetailsComponent {
   imageRoute: string = '';
   comments!: [];
   active = true;  
-  movies: iMovie[] = [];  
+  movies: any[] = [];    
   
   constructor(private route: ActivatedRoute, 
     private movieService: MovieService,
     private localStorageService: LocalStorageService) { }
 
-  ngOnInit(): void {    
-    console.log("enable ", this.active);    
+  ngOnInit(): void {   
+    //this.localStorageService.removeAllData();
     this.id = this.route.snapshot.params['id'];       
     this.movieService.GetMovieById(this.id).then((response: any) => {      
       this.items = response;      
@@ -43,15 +43,23 @@ export class DetailsComponent {
       console.error(': ', error);
     }) 
   }
-  saveWatchlist(): void {
-    this.movies.push(...this.items); 
-    //const list = { movie: this.items };
-    this.localStorageService.setData('list', this.movies);
+
+  saveWatchlist(): void {          
+    if(this.localStorageService.isEmpty())
+    {
+      this.localStorageService.setData('list', this.items);
+    }else
+    {
+      const oldData = this.localStorageService.getData('list');
+      oldData.push(...this.items);
+      this.localStorageService.setData('list', oldData);   
+    }
+     
     this.active = !this.active;
   }
 
   getWatchlist(): void {
     const list = this.localStorageService.getData('list');
-    console.log('list:', this.movies);
+    console.log('localstorage tiene :', list);
   }  
 }
