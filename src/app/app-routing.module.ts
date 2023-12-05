@@ -4,7 +4,7 @@ import { TableComponent } from './table/table.component';
 import { DetailsComponent } from './details/details.component';
 
 const routes: Routes = [
-  { path: 'detailsMovie/:id', component: DetailsComponent },
+  { path: 'details/:id', component: DetailsComponent },
   { path: '', component: TableComponent }, 
   { path: '**', component: TableComponent } 
 ];

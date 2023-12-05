@@ -7,6 +7,7 @@ import { iMovie } from '../data/iMovie';
 import { LocalStorageService } from '../data/local-storage.service';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import {CommonModule} from '@angular/common';
 
 
 @Component({
@@ -14,7 +15,9 @@ import {MatCardModule} from '@angular/material/card';
   templateUrl: './details.component.html',
   styleUrl: './details.component.css',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule],
+  imports: [MatCardModule, 
+    MatButtonModule,
+    CommonModule],
 })
 export class DetailsComponent {
   items!: [];  
@@ -22,7 +25,7 @@ export class DetailsComponent {
   imageRoute: string = '';
   comments!: [];
   active = true;  
-  movies: iMovie[] = [];
+  movies: iMovie[] = [];  
   
   constructor(private route: ActivatedRoute, 
     private movieService: MovieService,
@@ -32,7 +35,7 @@ export class DetailsComponent {
     console.log("enable ", this.active);    
     this.id = this.route.snapshot.params['id'];       
     this.movieService.GetMovieById(this.id).then((response: any) => {      
-      this.items = response;
+      this.items = response;      
       this.imageRoute = response[0].imageRoute;
       this.comments = response[0].comments;      
     })
