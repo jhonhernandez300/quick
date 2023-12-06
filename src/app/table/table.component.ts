@@ -23,7 +23,7 @@ import {LiveAnnouncer} from '@angular/cdk/a11y';
 export class TableComponent {
   displayedColumns: string[] = ['imageRoute', 'title', 'genre', 'releaseDate'];
   //dataSource: iMovie[] = [];
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource<iMovie>();
     
   movie: iMovie = {
     movieId: 0,
@@ -44,18 +44,17 @@ export class TableComponent {
   constructor(private movieService: MovieService,
     private _liveAnnouncer: LiveAnnouncer) { }
 
-  @ViewChild(MatSort)
+  // @ViewChild(MatSort)
+  // sort: MatSort = new MatSort;
+  @ViewChild(MatSort, { static: true })
   sort: MatSort = new MatSort;
 
-  ngAfterViewInit() {
-    console.log('this.sort ', this.sort);
-    console.log('this.dataSource.sort ', this.dataSource.sort);
+  ngAfterViewInit() {    
     this.dataSource.sort = this.sort;
   }
 
   /** Announce the change in sort state for assistive technology. */
-  announceSortChange(sortState: Sort) {   
-    console.log('sortState ', sortState);
+  announceSortChange(sortState: Sort) {       
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {
@@ -67,8 +66,8 @@ export class TableComponent {
     this.movieService.GetAllMovies().then((response) => {
       console.log('response of GetAllMovies', response);
       this.items = response;
-      this.dataSource = new MatTableDataSource(response);
-      console.log('dataSource ', this.dataSource);
+      //this.dataSource = new MatTableDataSource(response);
+      this.dataSource.data = response as iMovie[];      
       this.id = response.movieId;
     })
     .catch((error) => {

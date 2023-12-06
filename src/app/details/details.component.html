@@ -1,50 +1,64 @@
-<br><br>
 <h2>Movie Detail's</h2>
-<br><br>   
 
-<div *ngFor="let i of items">   
-  <mat-card class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{i['title']}}</mat-card-title>
-      <mat-card-subtitle>{{i['releaseDate']  | date:'shortDate'}}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src={{imageRoute}} >
-    <mat-card-content>
-      <p>
-        {{i['description']}}
-      </p>
-      <div id="ratingDurationGenre">
-        <div>Rating: {{i['rating']}}</div>
-        <div>Duration: {{i['duration']}}</div>
-        <div>Genre: {{i['genre']}}</div>
+<div  *ngIf="items">
+  <div id="cardHomeButton">
+
+    <div *ngFor="let i of items">   
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{i['title']}}</mat-card-title>
+          <mat-card-subtitle>{{i['releaseDate']  | date:'shortDate'}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src={{imageRoute}} >
+        <mat-card-content>
+          <p>
+            {{i['description']}}
+          </p>
+          <div id="ratingDurationGenre">
+            <div>Rating: {{i['rating']}}</div>
+            <div>Duration: {{i['duration']}}</div>
+            <div>Genre: {{i['genre']}}</div>
+        </div>
+        </mat-card-content>    
+        <mat-card-actions>       
+          <button mat-button [disabled]="!active" (click)="saveWatchlist()">Add to Watchlist</button>
+          <button mat-button (click)="getWatchlist()">Get Watchlist</button>
+        </mat-card-actions>
+      </mat-card>
     </div>
-    </mat-card-content>    
-    <mat-card-actions>       
-      <button mat-button [disabled]="!active" (click)="saveWatchlist()">Add to Watchlist</button>
-      <button mat-button (click)="getWatchlist()">Get Watchlist</button>
-    </mat-card-actions>
-  </mat-card>
+
+    <div >
+      <div class="example-button-container">
+        <button mat-fab color="warn"  (click)="goHome()" aria-label="Home button">
+          <mat-icon>home</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>  
+  
+  <div id="commentsAndPlayer">
+  
+    <div>
+      <iframe [src]="sanitizedUrl" 
+        width="560" height="315" 
+        frameborder="0" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  
+    <div id="comments">
+      <h3>Comments:</h3>
+      <ul *ngFor="let comment of comments">
+          <li>{{comment['content']}}</li>
+      </ul> 
+    </div>
+  
+  </div>  
 </div>
 
-<div  *ngFor="let i of items">
-  <!-- <iframe 
-    width="560" 
-    height="315" 
-    src={{safeUrl}}  
-    title="YouTube video player" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    allowfullscreen>
-  </iframe> -->
-</div>
 
-<div id="comments">
-    <h3>Comments:</h3>
-    <ul *ngFor="let comment of comments">
-        <li>{{comment['content']}}</li>
-    </ul> 
-</div>
+
 
 
 

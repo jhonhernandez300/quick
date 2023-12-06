@@ -9,6 +9,8 @@
 
 h2{
   text-align: center;
+  padding-top: 40px;
+  padding-bottom: 35px;
 }
 
 #comments {
@@ -18,4 +20,24 @@ h2{
 #ratingDurationGenre{
   display: flex;
   flex-direction: column;
+}
+
+#commentsAndPlayer{
+  display: flex;
+  flex-direction: row;
+  padding-top: 50px;
+}
+
+#commentsAndPlayer > div {
+  padding-right: 50px;
+  padding-left: 40px;
+}
+
+#cardHomeButton {
+  display: flex;
+  flex-direction: row;
+}
+
+#cardHomeButton > div {
+  padding-left: 500px;
 }
