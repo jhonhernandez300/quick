@@ -1,39 +1,9 @@
-<!-- <br><br>
+<br><br>
 <h2>Movie Detail's</h2>
-<br> 
 <br><br>   
 
 <div *ngFor="let i of items">   
-
-    <ul>
-        <li><img src={{imageRoute}} width="35px" height="35px"/> </li>
-        <li>{{i['title']}}</li>
-        <li>{{i['description']}}</li>
-        <li>{{i['rating']}}</li>
-        <li>{{i['duration']}}</li>
-        <li>{{i['genre']}}</li>  
-         <li>{{i['releaseDate'] | date:'shortDate'}}</li>    
-
-         <li>            
-            <div>                
-                <button [disabled]="!active" (click)="saveWatchlist()">Add to Watchlist</button>                
-                <button (click)="getWatchlist()">Get Watchlist</button>
-            </div>
-        </li>        
-        
-        <li>{{i['trailerLink']}}</li>
-
-        <li>
-            <ul *ngFor="let comment of comments">
-                <li>{{comment['content']}}</li>
-            </ul>            
-        </li>
-    </ul>
-</div>  -->
-
-<br><br>
-<div *ngFor="let i of items">   
-<mat-card class="example-card">
+  <mat-card class="example-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{i['title']}}</mat-card-title>
@@ -44,12 +14,12 @@
       <p>
         {{i['description']}}
       </p>
-      <div>
-        Rating: {{i['rating']}}      
-        Duration: {{i['duration']}}
-        Genre: {{i['genre']}}
+      <div id="ratingDurationGenre">
+        <div>Rating: {{i['rating']}}</div>
+        <div>Duration: {{i['duration']}}</div>
+        <div>Genre: {{i['genre']}}</div>
     </div>
-    </mat-card-content>
+    </mat-card-content>    
     <mat-card-actions>       
       <button mat-button [disabled]="!active" (click)="saveWatchlist()">Add to Watchlist</button>
       <button mat-button (click)="getWatchlist()">Get Watchlist</button>
@@ -57,8 +27,20 @@
   </mat-card>
 </div>
 
-<div>
-    <h2>Comments:</h2>
+<div  *ngFor="let i of items">
+  <!-- <iframe 
+    width="560" 
+    height="315" 
+    src={{safeUrl}}  
+    title="YouTube video player" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    allowfullscreen>
+  </iframe> -->
+</div>
+
+<div id="comments">
+    <h3>Comments:</h3>
     <ul *ngFor="let comment of comments">
         <li>{{comment['content']}}</li>
     </ul> 

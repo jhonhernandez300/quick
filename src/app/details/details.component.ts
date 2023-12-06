@@ -8,6 +8,7 @@ import { LocalStorageService } from '../data/local-storage.service';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {CommonModule} from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -17,7 +18,8 @@ import {CommonModule} from '@angular/common';
   standalone: true,
   imports: [MatCardModule, 
     MatButtonModule,
-    CommonModule],
+    CommonModule
+  ],
 })
 export class DetailsComponent {
   items!: [];  
@@ -26,18 +28,25 @@ export class DetailsComponent {
   comments!: [];
   active = true;  
   movies: any[] = [];    
+  urlFirstPart: any = 'https://www.youtube.com/embed/';
+  urlSecondPart: any = '';
+  safeUrl: any = '';
+
   
   constructor(private route: ActivatedRoute, 
     private movieService: MovieService,
-    private localStorageService: LocalStorageService) { }
+    private localStorageService: LocalStorageService,
+    private _sanitizer: DomSanitizer) { }
 
-  ngOnInit(): void {   
-    //this.localStorageService.removeAllData();
+  ngOnInit(): void {           
     this.id = this.route.snapshot.params['id'];       
     this.movieService.GetMovieById(this.id).then((response: any) => {      
       this.items = response;      
       this.imageRoute = response[0].imageRoute;
-      this.comments = response[0].comments;      
+      this.comments = response[0].comments;     
+      this.urlSecondPart = response[0].trailerLink;      
+      this.safeUrl = this._sanitizer.bypassSecurityTrustUrl(this.urlFirstPart + this.urlSecondPart);      
+
     })
     .catch((error: any) => {
       console.error(': ', error);

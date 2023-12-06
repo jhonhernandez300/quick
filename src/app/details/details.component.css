@@ -1,7 +1,21 @@
 .example-card {
   max-width: 400px;
+  margin: 0 auto;
 }
 
 .example-header-image {  
   background-size: cover;
+}
+
+h2{
+  text-align: center;
+}
+
+#comments {
+  padding-top: 40px;
+}
+
+#ratingDurationGenre{
+  display: flex;
+  flex-direction: column;
 }
